@@ -22,7 +22,7 @@ namespace mission06_Allen.Controllers
         {
             return View();
         }
-        public IActionResult Baconsale()
+        public IActionResult SeeMovies()
         {
             return View();
         }

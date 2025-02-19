@@ -6,24 +6,25 @@ namespace mission06_Allen.Models
     {
         [Key]
         [Required]
-        public int MovieID { get; set; }
+        public int MovieId { get; set; }
 
-        [Required]
-        public string Category { get; set; }
+        //public string? Category { get; set; }
+        public string? CategoryId { get; set; }
 
         [Required]
         public string Title { get; set; }
 
         [Required]
         public int Year { get; set; }
+        public string? Director { get; set; }
 
+        public string? Rating { get; set; }
         [Required]
-        public string Director { get; set; }
-
-        [Required]
-        public string Rating { get; set; }
         public bool Edited { get; set; }
-        public string Lent { get; set; }
-        public string Notes { get; set; }
+
+        public string? LentTo { get; set; }
+        [Required]
+        public string CopiedToPlex { get; set; }
+        public string? Notes { get; set; }
     }
 }

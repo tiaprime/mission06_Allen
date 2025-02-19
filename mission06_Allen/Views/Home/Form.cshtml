@@ -10,8 +10,8 @@
 <form method="post">
 
 
-	<label asp-for="Category">Category: </label>
-	<input asp-for="Category" />
+	<label asp-for="CategoryId">CategoryID: </label>
+	<input asp-for="CategoryId" />
 	<br />
 	<label asp-for="Title">Title: </label>
 	<input asp-for="Title" />
@@ -44,9 +44,17 @@
 	</select>
 	<br />
 
-	<label asp-for="Lent">Lent To:	</label>
-	<input asp-for="Lent" />
+	<label asp-for="LentTo">Lent To:	</label>
+	<input asp-for="LentTo" />
 	<br />
+
+	<label asp-for="CopiedToPlex">Added to Plex?</label>
+	<select asp-for="CopiedToPlex">
+		<option value="false">No</option>
+		<option value="true">Yes</option>
+	</select>
+	<br />
+
 	<label asp-for="Notes">Notes: </label>
 	<input asp-for="Notes" maxlength="25" />
 	<br />
