@@ -41,18 +41,30 @@ namespace mission06_Allen.Controllers
             ViewBag.Categories = _context.Categories
             .OrderBy(x => x.CategoryName)
             .ToList();
-            return View();
+            return View(new MovieForm());
         }
 
         [HttpPost]
         public IActionResult Form(MovieForm response)
         {
-            _context.Movies.Add(response); // the movie to the database
-            _context.SaveChanges(); //saves the changes to the database
 
-            return View("Confirmation", response);
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(response); // the movie to the database
+                _context.SaveChanges(); //saves the changes to the database
 
+                return View("Confirmation", response);
+            }
+            else //inlaved
+            {
+                ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+
+                return View(response);
+            }
         }
+
         public IActionResult Privacy()
         {
             return View();
@@ -67,9 +79,9 @@ namespace mission06_Allen.Controllers
             var recordToEdit = _context.Movies
                  .Single(x => x.MovieId == id);
 
-            ViewBag.Crafts = _context.Categories
-                .OrderBy(x => x.CategoryName)
-                .ToList();
+            ViewBag.Categories = _context.Categories
+            .OrderBy(x => x.CategoryName)
+            .ToList();
 
             return View("Form", recordToEdit);
         }
@@ -83,7 +95,23 @@ namespace mission06_Allen.Controllers
             return RedirectToAction("SeeMovies");
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
 
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieForm record)
+        {
+            _context.Movies.Remove(record);
+            _context.SaveChanges();
+
+            return RedirectToAction("SeeMovies");
+        }
 
     }
 }

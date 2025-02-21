@@ -15,7 +15,7 @@
 
 	<select asp-for="CategoryId">
 		<option value="">Select a Category</option>
-		@foreach (Category c in ViewBag.Categories)    //WHEN I USE A BRAKEPOINT IT LOOKS LIKE THERE ARE THINGS IN THE VIEW BAG
+		@foreach (Category c in ViewBag.Categories)   
 			{
 				<option value="@c.CategoryId">@c.CategoryName</option>
 			}
@@ -60,8 +60,8 @@
 
 	<label asp-for="CopiedToPlex">Added to Plex?</label>
 	<select asp-for="CopiedToPlex">
-		<option value="false">No</option>
-		<option value="true">Yes</option>
+		<option value="0">No</option>
+		<option value="1">Yes</option>
 	</select>
 	<br />
 
@@ -70,6 +70,8 @@
 	<br />
 
 
-	<button type="submit"> Submit Application</button>
+	<button type="submit"> Enter Movie</button>
+	@* this is needed for the errors *@
+	<div asp-validation-summary="All"></div>
 
 </form>
