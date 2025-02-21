@@ -9,5 +9,6 @@ namespace mission06_Allen.Models
         {
         }
         public DbSet<MovieForm> Movies { get; set; } //what builts the table
+        public DbSet<Category> Categories { get; set; }
     }
 }

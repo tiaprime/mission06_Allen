@@ -1,7 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
+using Microsoft.EntityFrameworkCore;
 using mission06_Allen.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace mission06_Allen.Controllers
 {
@@ -22,14 +24,23 @@ namespace mission06_Allen.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult SeeMovies()
         {
-            return View();
+            //linq
+            var movies = _context.Movies
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
+            return View(movies);
         }
 
         [HttpGet]
         public IActionResult Form()
         {
+            ViewBag.Categories = _context.Categories
+            .OrderBy(x => x.CategoryName)
+            .ToList();
             return View();
         }
 
@@ -49,6 +60,30 @@ namespace mission06_Allen.Controllers
 
 
 
-       //Tehe this is anthoer github test
+        //LET HANDEL EDITS
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                 .Single(x => x.MovieId == id);
+
+            ViewBag.Crafts = _context.Categories
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+
+            return View("Form", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieForm updatedInfo)
+        {
+            _context.Update(updatedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("SeeMovies");
+        }
+
+
+
     }
 }

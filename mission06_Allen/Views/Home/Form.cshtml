@@ -9,12 +9,22 @@
 
 <form method="post">
 
+	@* THis hold the record ID for editing *@
+	<input type="hidden" asp-for="MovieId" />
 
-	<label asp-for="CategoryId">CategoryID: </label>
-	<input asp-for="CategoryId" />
+
+	<select asp-for="CategoryId">
+		<option value="">Select a Category</option>
+		@foreach (Category c in ViewBag.Categories)    //WHEN I USE A BRAKEPOINT IT LOOKS LIKE THERE ARE THINGS IN THE VIEW BAG
+			{
+				<option value="@c.CategoryId">@c.CategoryName</option>
+			}
+	</select>
+
 	<br />
-	<label asp-for="Title">Title: </label>
-	<input asp-for="Title" />
+
+	<label asp-for="Title"> Title: </label>
+		<input asp-for="Title" />
 	<br />
 	<label asp-for="Year">Year: </label>
 	<input asp-for="Year" />

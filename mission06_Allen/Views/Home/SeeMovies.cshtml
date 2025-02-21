@@ -24,11 +24,11 @@
 
 	</thead>
 
-	@foreach (var x in Model)
+	@foreach (var x in Model) //loop through the list of movies
 	{ 
 		<tbody>
 			<tr>
-			<td>@x.CategoryId</td>
+			<td>@x.Category?.CategoryName</td>
 			<td>@x.Title</td>
 			<td>@x.Year</td>
 			<td>@x.Director</td>
@@ -38,8 +38,8 @@
 			<td>@x.CopiedToPlex</td>
 			<td>@x.Notes</td>
 
-				@* <td><a class="btn btn-outline-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.ApplicationID">Edit</a></td> *@
-				@* <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.ApplicationID">Delete</a></td> *@
+				<td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieId">Edit</a></td>
+				<td><a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieId">Delete</a></td>
 			</tr>
 
 		</tbody>

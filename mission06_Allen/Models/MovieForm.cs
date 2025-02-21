@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mission06_Allen.Models
 {
@@ -8,13 +9,16 @@ namespace mission06_Allen.Models
         [Required]
         public int MovieId { get; set; }
 
-        //public string? Category { get; set; }
-        public string? CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
 
-        [Required]
+
+        [Required(ErrorMessage = "You must enter a A Title")]
         public string Title { get; set; }
 
-        [Required]
+        // lower limit of 1888
+        [Range(1888, double.MaxValue, ErrorMessage = "Enter a number of 1888 or greater.")]
         public int Year { get; set; }
         public string? Director { get; set; }
 
